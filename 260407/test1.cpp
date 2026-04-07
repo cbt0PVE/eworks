@@ -1,23 +1,24 @@
 #include<iostream>
 #include<unordered_map>
 using namespace std;
-struct ListNode {
+struct ListNode1 {
 	int val;
-	ListNode* next;
-	ListNode(int x) : val(x), next(NULL) {}
+	ListNode1* next;
+	ListNode1(int x) : val(x), next(NULL) {}
 };
+
 //leetcode 142
 class Solution1
 {
 public:
-	ListNode* detectCycle(ListNode* head)
+	ListNode1* detectCycle(ListNode1* head)
 	{
 		if (head == nullptr || head->next == nullptr)
 		{
 			return nullptr;
 		}
-		ListNode* slow = head;
-		ListNode* fast = head;
+		ListNode1* slow = head;
+		ListNode1* fast = head;
 
 		while (fast != nullptr && fast->next != nullptr)
 		{
@@ -59,5 +60,30 @@ public:
 class Solution
 {
 public:
-	Node* copyRondomList(L)
+	Node* copyRandomList(Node* head)
+	{
+		if (!head)
+			return nullptr;
+
+		std::unordered_map<Node*, Node*> map;
+		Node* cur = head;
+
+		while (cur)
+		{
+			map[cur] = new Node(cur->val);
+			cur = cur->next;
+		}
+
+		cur = head;
+		while (cur)
+		{
+			map[cur]->next = map[cur->next];
+			map[cur]->random = map[cur->random];
+			cur = cur->next;
+		}
+
+		return map[head];
+	}
 };
+
+//
