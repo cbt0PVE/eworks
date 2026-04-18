@@ -86,6 +86,10 @@ void test3()
 	cout << s2.c_str() << endl;
 	s2.erase(5);
 	cout << s2.c_str() << endl;
+	s2.resize(8,'!');
+	cout << s2.c_str() << endl;
+	s2.resize(13, '!');
+	cout << s2.c_str() << endl;
 }
 
 int main()

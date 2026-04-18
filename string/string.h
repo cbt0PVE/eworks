@@ -47,13 +47,15 @@ namespace bit
 			size_=strlen(str);
 			capacity_ = size_;
 			str_ = new char[capacity_ + 1];
-			strcpy(str_, str);
+			//strcpy(str_, str);
+			memcpy(str_, str,size_ +1);
 		}
 
 		string(const string& s)
 		{
 			str_ = new char[s.capacity_ + 1];
-			strcpy(str_, s.str_);
+			//strcpy(str_, s.str_);
+			memcpy(str_, s.str_,s.size_ +1);
 			size_ = s.size_;
 			capacity_ = s.capacity_;
 		}
@@ -93,7 +95,8 @@ namespace bit
 			if (n > capacity_)
 			{
 				char* tmp = new char[n + 1];
-				strcpy(tmp, str_);
+				//strcpy(tmp, str_);
+				memcpy(tmp, str_, size_ + 1);
 				delete[] str_;
 				str_ = tmp;
 				capacity_ = n;
@@ -119,7 +122,8 @@ namespace bit
 				reserve(size_ + len);
 			}
 
-			strcpy(str_ + size_, str);
+			//strcpy(str_ + size_, str);
+			memcpy(str_ + size_, str, len + 1);
 			size_ += len;
 		}
 
@@ -260,8 +264,89 @@ namespace bit
 
 			size_t len = strlen(str.str_);
 			str_ = new char[len + 1];
-			strcpy(str_, str.str_);
+			memcpy(str_, str.str_,len +1);
 			return *this;
+		}
+
+		
+		void resize(size_t n,char ch = '\0')
+		{
+			if (n < size_)
+			{
+				size_ = n;
+				str_[size_] = '\0';
+			}
+			else
+			{
+				reserve(n);
+				for (size_t i = size_; i < n; i++)
+				{
+					str_[i] = ch;
+				}
+				size_ = n;
+				str_[size_] = '\0';
+			}
+		}
+
+		void clear()
+		{
+			str_[0] = '\0';
+			size_ = 0;
+		}
+
+		//bool operator<(const string& s)
+		//{
+		//	size_t i = 0;
+		//	size_t j = 0;
+		//	while (i < size_ && j < s.size_)
+		//	{
+		//		if (str_[i] < str_[j])
+		//		{
+		//			return true;
+		//		}
+		//		else if (str_[i] > s.str_[j])
+		//			return false;
+		//		else
+		//		{
+		//			++i;
+		//			++j;
+		//		}
+		//	}
+		//	//return i == size_ && j != s.size_;
+		//	return size_ < s.size_;
+		//}
+
+		bool operator<(const string& s)const
+		{
+			int ret = memcmp(str_, s.str_, size_ < s.size_ ? size_ : s.size_);
+
+			return ret == 0 ? size_ < size_ < s.size_ : ret < 0;
+		}
+
+		bool operator==(const string& s)const
+		{
+			return size_ == s.size_ &&
+				memcmp(str_, s.str_, size_) == 0;
+		}
+
+		bool operator<=(const string& s)const
+		{
+			return *this < s || *this == s;
+		}
+
+		bool operator>(const string& s)const
+		{
+			return !(*this <= s);
+		}
+
+		bool operator>=(const string& s)const
+		{
+			return !(*this < s);
+		}
+
+		bool operator!=(const string& s)const
+		{
+			return !(*this == s);
 		}
 
 
@@ -275,7 +360,51 @@ namespace bit
 		const static size_t npos;
 		//const static size_t npos = -1;???
 		//const static double x = 1.1;????
+		//inline static double x = 1.1;
 	};
 
 	const size_t string::npos = -1;
+	ostream& operator<<(ostream& out, const string& s)
+	{
+		for (auto ch : s)
+		{
+			out << ch;
+		}
+		return out;
+	}
+
+	istream& operator>>(istream& in, string& s)
+	{
+		s.clear();
+		char ch = in.get();
+		//处理缓冲区前
+		while (ch == ' ' || ch == '\n')
+		{
+			ch = in.get();
+		}
+		char buffer[128];
+		int i = 0;
+		//in >> ch;
+		while (ch != ' ' && ch != '\n')
+		{
+			//s += ch;
+			// 扩容调用太多
+			buffer[i++] = ch;
+			if (i == 127)
+			{
+				buffer[i] = '\0';
+				s += buffer;
+				i = 0;
+			}
+
+			//in >> ch;
+			ch = in.get();
+		}
+		if (i != 0)
+		{
+			buffer[i] = '\0';
+			s += buffer;
+		}
+		return in;
+	}
 };
