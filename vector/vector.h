@@ -38,7 +38,19 @@ namespace bit
 			finish_(nullptr),
 			end_of_storage_(nullptr)
 		{}
-
+		vector(size_t n, const T& val = T())
+		{
+			resze(n, val);
+		}
+		template<class InputIterator>
+		vector(InputIterator first, InputIterator last)
+		{
+			while (first != last)
+			{
+				push_back(*first);
+				++first;
+			}
+		}
 		vector(const vector<T>& V)
 			:start_(nullptr),
 			finish_(nullptr),
@@ -53,7 +65,7 @@ namespace bit
 				start_[i] = v.start_[i];
 			}
 			finish_ = start_ + v.size();
-			end_of_storage_ = start_ + v.capacity();
+			end_of_storage_ = start_ + v.capacity(); 
 		}
 		void swap(vector<T>& v)
 		{
