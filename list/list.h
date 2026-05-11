@@ -101,19 +101,50 @@ namespace helta
 		{
 			return head_;
 		}
-		list()
+		void empty_init()
 		{
 			head_ = new Node;
 			head_->prev_ = head_;
 			head_->next_ = head_;
 		}
+		list()
+		{
+			empty_init();
+		}
+
+		list(const list<T>& lt)
+		{
+			empty_init();
+			for (auto& e : lt)
+			{
+				push_back(e);
+			}
+		}
+
+		void swap(list<T>& lt)
+		{
+			std::swap(head_, lt.head_);
+			std::swap(size_, lt.size_);
+		}
+		list<T>& operator=(list<T> lt)
+		//list& operator=(list lt)
+		{
+			swap(lt);
+			return *this;
+		}
 		~list()
 		{
-
+			clear();
+			delete head_;
+			head_ = nullptr;
 		}
 		void clear()
 		{
-
+			iterator it = begin();
+			while (it != end())
+			{
+				it = erase(it);
+			}
 		}
 		void push_back(const T& x)
 		{
