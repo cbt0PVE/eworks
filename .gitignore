@@ -3,16 +3,19 @@ bin-debug/
 bin-release/
 [Oo]bj/
 [Bb]in/
-
+main
+*.exe
+*.out
 # Other files and folders
 .settings/
-
+*.dSYM/
+build/
 # Executables
 *.swf
 *.air
 *.ipa
 *.apk
-
+.DS_Store
 #过滤掉不想要文件和文件夹
 *.exe
 *.sln
@@ -25,6 +28,10 @@ bin-release/
 Debug/
 .vs
 Release/
+.idea/
+.vscode/
+cmake-build-debug/
+cmake-build-release/
 
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
 # should NOT be excluded as they contain compiler settings and other important
