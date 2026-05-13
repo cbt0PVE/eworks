@@ -2,6 +2,7 @@
 #include <vector>
 #include "Queue.h"
 #include"Stack.h"
+#include<deque>
 using namespace std;
 //leetcode 036
 /*class Solution
