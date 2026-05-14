@@ -15,7 +15,7 @@ build/
 *.air
 *.ipa
 *.apk
-.DS_Store
+*.DS_Store
 #过滤掉不想要文件和文件夹
 *.exe
 *.sln
@@ -26,10 +26,10 @@ build/
 *.db
 *.ipch
 Debug/
-.vs
+*.vs
 Release/
-.idea/
-.vscode/
+*.idea/
+*.vscode/
 cmake-build-debug/
 cmake-build-release/
 
