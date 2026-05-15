@@ -1,8 +1,6 @@
-#include <iostream>
-#include <vector>
-#include "Queue.h"
+
+#include"Queue.h"
 #include"Stack.h"
-#include<deque>
 using namespace std;
 //leetcode 036
 /*class Solution
@@ -85,9 +83,6 @@ public:
         return vv;
     }
 };*/
-void test_stack_queue() {
-
-}
 int main()
 {
     return 0;
