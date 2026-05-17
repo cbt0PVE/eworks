@@ -3,7 +3,8 @@ bin-debug/
 bin-release/
 [Oo]bj/
 [Bb]in/
-main
+main/
+
 *.exe
 *.out
 # Other files and folders
