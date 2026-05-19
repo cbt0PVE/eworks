@@ -4,6 +4,8 @@
 using namespace std;
 int main()
 {
-    cout << "Binary Search Tree Test" << endl;
-    return 0;
+	//Car c;
+	key_value::TestBSTree2();
+
+	return 0;
 }
