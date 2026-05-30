@@ -4,7 +4,7 @@ bin-release/
 [Oo]bj/
 [Bb]in/
 main/
-
+test/git
 *.exe
 *.out
 # Other files and folders
